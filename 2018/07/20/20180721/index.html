@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="使用Hexo+Github Page搭建博客"><meta name="keywords" content="Hexo"><meta name="author" content="Links,undefined"><meta name="copyright" content="Links"><title>使用Hexo+Github Page搭建博客 | Links's Blog</title><link rel="shortcut icon" href="/my-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#准备工作"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js"><span class="toc-number">2.1.</span> <span class="toc-text">Node.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git安装"><span class="toc-number">2.2.</span> <span class="toc-text">Git安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github-Page"><span class="toc-number">2.3.</span> <span class="toc-text">Github Page</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/Taiho.jpg"></div><div class="author-info__name text-center">Links</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">1</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">1</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">2</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/cv16.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Links's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/About">About</a></span></div><div id="post-info"><div id="post-title">使用Hexo+Github Page搭建博客</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-20</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/教程/">教程</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>看了各种搭建博客的方案,对比了一下各种选项,最后选择了Hexo+Github Page.</p>
+<blockquote>
+<p><strong>什么是 Hexo？</strong><br>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+</blockquote>
+<blockquote>
+<p><strong>What is GitHub Pages?</strong><br>GitHub Pages is a static site hosting service designed to host your personal, organization, or project pages directly from a GitHub repository.  </p>
+</blockquote>
+<a id="more"></a>
+<p>使用这种方案建立的博客就会有这些特点:  </p>
+<ol>
+<li>基于静态网页,适合小网站.</li>
+<li>Github帮助托管,省心.</li>
+<li>免费啊免费,上面的两个工具都不要钱啊(重点).</li>
+<li>可以绑定自己的域名.</li>
+</ol>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>访问<a href="nodejs.org">Node.js官网</a>获取安装包.<br>记得要勾选add to path.</p>
+<h2 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h2><p><a href="git-scm.com">Git官网</a><br>其实我是VS2017自带的.<br>以下需要使用命令行的操作均在Git bash中完成.</p>
+<h2 id="Github-Page"><a href="#Github-Page" class="headerlink" title="Github Page"></a>Github Page</h2><ol>
+<li>在<a href="https://github.com/" target="_blank" rel="noopener">Github</a>创建一个帐号.  </li>
+<li><p>创建Github Page<br>帐号创建后,选择绿色的New repository按钮,创建一个代码仓库, Repository name必须为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">你的用户名.github.io</span><br></pre></td></tr></table></figure>
+<p>进入刚创建的Repository-Settings,下拉找到GitHub Pages选项,等待一段时间会有绿色的提示 “Your site is published at xxx.io.”表示成功了.</p>
+</li>
+<li><p>配置ssh key,解决本地与Github的连接问题.<br>在Git bash中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;邮件地址&quot;</span><br></pre></td></tr></table></figure>
+<p>会出来几个确认选项,全部回车确认.<br>在”C:\Users\你的用户名.ssh”路径下可以看到”id_rsa”和”id_rsa.pub”文件.用记事本打开”id_rsa.pub”将内容复制到</p>
+<blockquote>
+<p>你的Github主页-&gt;Settings-&gt;SSH and GPG keys-&gt;SSH keys</p>
+</blockquote>
+<p>输入以下内容测试ssh是否配置成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>如果显示”Hi xxx! You’ve successfully authenticated, but GitHub does not provide shell access.”则为成功.  </p>
+<p>最后配置登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Github用户名&quot;</span><br><span class="line">git config --global user.email &quot;Github邮箱&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p># </p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Links</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/07/20/20180721/">http://yoursite.com/2018/07/20/20180721/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a></div><nav id="pagination"></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2018 By Links</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script></body></html>
