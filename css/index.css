@@ -1144,7 +1144,7 @@ footer {
   cursor: pointer;
 }
 #pagination .page-number.current {
-  background: #ff9a9c;
+  background: #000;
   color: #fff;
   cursor: default;
 }
@@ -1649,7 +1649,7 @@ img:hover {
   transition: all 0.2s ease-in-out;
 }
 #sidebar .toggle-sidebar-info span:hover {
-  background: #ff9a9c;
+  background: #000;
 }
 #sidebar .author-info {
   margin-left: -0.25rem;
@@ -1730,10 +1730,10 @@ img:hover {
   content: "";
 }
 #sidebar .author-info-articles .article-meta:hover {
-  background: #ffa2a4;
+  background: #141414;
 }
 #sidebar .author-info-articles .article-meta:hover .pull-right {
-  color: #ff9a9c;
+  color: #000;
 }
 #sidebar .author-info-links__title {
   margin-bottom: 0.4rem;
@@ -1795,15 +1795,15 @@ img:hover {
   transition: all 0.2s ease-in-out;
 }
 #sidebar .sidebar-toc .toc-link.active {
-  border-right-color: #ff484c;
-  background: #ff9a9c;
+  border-right-color: #000;
+  background: #000;
   color: #fff;
 }
 #sidebar .sidebar-toc__progress {
   position: relative;
   margin-top: -0.3rem;
   padding-left: 0.6rem;
-  color: #ff9a9c;
+  color: #000;
 }
 #sidebar .sidebar-toc__progress .progress-notice {
   margin-right: 0.4rem;
@@ -1815,5 +1815,5 @@ img:hover {
 #sidebar .sidebar-toc__progress-bar {
   width: 0;
   height: 1px;
-  background: #ff9a9c;
+  background: #000;
 }
