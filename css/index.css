@@ -565,10 +565,11 @@ footer {
 }
 #site-info {
   padding: 12rem 1rem;
+  background: rgba(0,0,0,0.4);
 }
 #site-title,
 #site-sub-title {
-  color: #ff9a9c;
+  color: #eee;
   text-align: center;
   text-shadow: 0.1rem 0.1rem 0.2rem rgba(0,0,0,0.15);
   line-height: 2;
@@ -587,12 +588,12 @@ footer {
 }
 #site-social-icons .social-icon {
   margin: 0 0.5rem;
-  color: #ff9a9c;
+  color: #eee;
   font-size: 1.4rem;
   cursor: pointer;
 }
 #site-social-icons .social-icon:hover {
-  color: #bff3ff;
+  color: #fff;
 }
 #page-header {
   position: absolute;
@@ -611,7 +612,7 @@ footer {
 #page-header .toggle-menu {
   display: none;
   padding-top: 0.5rem;
-  color: #ff9a9c;
+  color: #eee;
   cursor: pointer;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
@@ -623,11 +624,11 @@ footer {
   color: #fff;
 }
 #page-header a {
-  color: #ff9a9c;
+  color: #eee;
   text-decoration: none;
 }
 #page-header a:hover {
-  color: #bff3ff;
+  color: #fff;
 }
 #page-header .site-page {
   position: relative;
@@ -1202,7 +1203,7 @@ footer {
   height: 56px;
 }
 #top-container a {
-  color: #ff9a9c;
+  color: #eee;
   text-decoration: none;
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
@@ -1211,7 +1212,7 @@ footer {
   transition: all 0.3s ease-out;
 }
 #top-container a:hover {
-  color: #bff3ff;
+  color: #fff;
 }
 #top-container #top-img {
   padding: 0;
@@ -1224,7 +1225,8 @@ footer {
 #top-container #post-info {
   padding: 7.5rem 1rem;
   width: 100%;
-  color: #ff9a9c;
+  color: #eee;
+  background: rgba(0,0,0,0.4);
   text-align: center;
 }
 #top-container #post-title {
