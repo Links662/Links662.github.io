@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="深度学习从入门到放弃:cs231n(1)-图像分类"><meta name="keywords" content="cs231n,机器学习,计算机视觉"><meta name="author" content="Links,undefined"><meta name="copyright" content="Links"><title>深度学习从入门到放弃:cs231n(1)-图像分类 | Links's Blog</title><link rel="shortcut icon" href="/img/my-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#图像分类"><span class="toc-number">1.</span> <span class="toc-text">图像分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#语义鸿沟-Semantic-Gap"><span class="toc-number">1.1.</span> <span class="toc-text">语义鸿沟(Semantic Gap)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#困难"><span class="toc-number">1.2.</span> <span class="toc-text">困难</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据驱动-Data-diverness"><span class="toc-number">1.3.</span> <span class="toc-text">数据驱动(Data diverness)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#K-Nearest-Neighbor分类器-K-NN-Classifier"><span class="toc-number">2.</span> <span class="toc-text">K-Nearest Neighbor分类器(K-NN Classifier)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#差异与距离选择"><span class="toc-number">2.1.</span> <span class="toc-text">差异与距离选择</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#L1距离-L1-distance"><span class="toc-number">2.1.1.</span> <span class="toc-text">L1距离(L1 distance)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#L2距离-L2-distance"><span class="toc-number">2.1.2.</span> <span class="toc-text">L2距离(L2 distance)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#L1和L2的比较"><span class="toc-number">2.1.3.</span> <span class="toc-text">L1和L2的比较</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#超参数"><span class="toc-number">2.2.</span> <span class="toc-text">超参数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置超参数"><span class="toc-number">2.2.1.</span> <span class="toc-text">设置超参数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#特点"><span class="toc-number">2.3.</span> <span class="toc-text">特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性分类"><span class="toc-number">3.</span> <span class="toc-text">线性分类</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/Taiho.jpg"></div><div class="author-info__name text-center">Links</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">3</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">6</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">3</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/billy.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Links's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">深度学习从入门到放弃:cs231n(1)-图像分类</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-27</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/学习/">学习</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="图像分类"><a href="#图像分类" class="headerlink" title="图像分类"></a>图像分类</h2><blockquote>
+<p>所谓图像分类问题，就是已有固定的分类标签集合，然后对于输入的图像，从分类标签集合中找出一个分类标签，最后把分类标签分配给该输入图像。这是计算机视觉的核心问题之一。</p>
+</blockquote>
+<h3 id="语义鸿沟-Semantic-Gap"><a href="#语义鸿沟-Semantic-Gap" class="headerlink" title="语义鸿沟(Semantic Gap)"></a>语义鸿沟(Semantic Gap)</h3><p>在基于内容的图像查询中, 存在一个底层特征和上层理解之间的差异.人是通过对语义的理解, 提取图片的信息, 判断两张图片的相似性, 而计算机”看”到却是由像素组成的巨大的数字阵列, 不能从中直接提取出语义信息.我们人对语义标签的理解和计算机存在差异, 这个问题叫语义鸿沟.</p>
+<a id="more"></a>
+<h3 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h3><p>由于上面所说的语义鸿沟, 计算机在识别图像的时候就会存在以下困难.</p>
+<ul>
+<li>视角(Viewpoint)</li>
+<li>照明(Illunination)</li>
+<li>形状(Deformation)</li>
+<li>遮挡(Occulusion)</li>
+<li>背景混乱(Background clutter)<br>一个物体的颜色与背景相似, 无法辨认</li>
+<li>类内差异(Intraclass variation)<br>同一种物体之间存在差异, 如白马和黑马.</li>
+</ul>
+<p>可能图片表示的还是同一个物体, 但是由于各种条件发生变化, 将导致整个像素矩阵发生变化, 使得图片在计算机中的数据完全不同.</p>
+<h3 id="数据驱动-Data-diverness"><a href="#数据驱动-Data-diverness" class="headerlink" title="数据驱动(Data diverness)"></a>数据驱动(Data diverness)</h3><p>考虑到上面的问题, 人们想通过写一个规则来识别某一个物体就变得十分困难.基于此, 人们想出了数据驱动的方法, 不通过写一个确定的规则来分类图片, 而是通过几个步骤让计算机自己总结图片的核心要素.</p>
+<ol>
+<li>收集:收集图片数据集(Dataset).</li>
+<li>训练:训练分类器(Classifier).</li>
+<li>评价:通过识别新的图片来评价分类器.</li>
+</ol>
+<h2 id="K-Nearest-Neighbor分类器-K-NN-Classifier"><a href="#K-Nearest-Neighbor分类器-K-NN-Classifier" class="headerlink" title="K-Nearest Neighbor分类器(K-NN Classifier)"></a>K-Nearest Neighbor分类器(K-NN Classifier)</h2><p>KNN分类器存储大量的图片, 当你需要对一张新的图片分类时, 它从数据集中选出1张或K张差异最小的图片, 在这些图片的标签中选择一个, 作为新图片的标签.</p>
+<h3 id="差异与距离选择"><a href="#差异与距离选择" class="headerlink" title="差异与距离选择"></a>差异与距离选择</h3><p>KNN分类器要选择差异最小的图片, 那么怎么计算图片之间的差异呢?<br><strong>通过图片之间的距离运算.</strong><br>首先将图片转化为两个向量, 选择一个适当的距离算法算出距离.</p>
+<h4 id="L1距离-L1-distance"><a href="#L1距离-L1-distance" class="headerlink" title="L1距离(L1 distance)"></a>L1距离(L1 distance)</h4><blockquote>
+<p>想象你在曼哈顿要从一个十字路口开车到另外一个十字路口，驾驶距离是两点间的直线距离吗？显然不是，除非你能穿越大楼。实际驾驶距离就是这个“曼哈顿距离”。而这也是曼哈顿距离名称的来源， 曼哈顿距离也称为城市街区距离(City Block distance)。</p>
+</blockquote>
+<script type="math/tex; mode=display">
+d_1(I_1, I_2)=\mathop{\sum}_{P}|I^P_1-I^P_2|</script><p>L1距离就是将每个像素比较, 求差值, 最后将差值的绝对值累加起来.  </p>
+<h4 id="L2距离-L2-distance"><a href="#L2距离-L2-distance" class="headerlink" title="L2距离(L2 distance)"></a>L2距离(L2 distance)</h4><blockquote>
+<p>欧式距离是最易于理解的一种距离计算方法，也称欧几里得距离，源自欧式空间中两点的距离公式，是指在m维空间两点之间的真实距离，</p>
+</blockquote>
+<script type="math/tex; mode=display">
+d_2(I_1, I_2)=\sqrt{(I^P_1-I^P_2)^2}</script><p>L2距离也还是将每个像素比较, 求差值, 但是将差值平方后累加, 再开方.  </p>
+<h4 id="L1和L2的比较"><a href="#L1和L2的比较" class="headerlink" title="L1和L2的比较"></a>L1和L2的比较</h4><p>L1距离更适用于特征向量, 向量的每个元素具有固定含义.<br>L2距离适用于空间中的通用向量, 每个元素没有或暂时不知道实际的含义.<br>而在面对差异时, L2比L1更不能接受差异, 所以L2的决策图像更为平滑.</p>
+<h3 id="超参数"><a href="#超参数" class="headerlink" title="超参数"></a>超参数</h3><p>KNN可以设定K值, 选择最接近的K张图片, 也可以选择不同的距离函数.<br>这些不能从训练中学到, 需要我们提前为算法做出选择的参数, 称为超参数.</p>
+<h4 id="设置超参数"><a href="#设置超参数" class="headerlink" title="设置超参数"></a>设置超参数</h4><p>超参数的设置不是显而易见的, 我们使用训练集来训练算法, 使用测试集来评价准确率. 但要注意一点, 不能通过测试集的准确率反过来进行超参数的设置, 否则就会发生过拟合的现象.</p>
+<blockquote>
+<p>过拟合<br>如果你使用测试集来调优，而且算法看起来效果不错，那么真正的危险在于：算法实际部署后，性能可能会远低于预期。这种情况，称之为算法对测试集过拟合。</p>
+</blockquote>
+<p>但是超参数还是要调试的, 于是有了以下的步骤</p>
+<ol>
+<li>将数据集分为<ol>
+<li>训练集 (Train)</li>
+<li>验证集 (Validation)</li>
+<li>测试集 (Test)</li>
+</ol>
+</li>
+<li>用训练集训练算法.</li>
+<li>用验证集验证算法, 选择一个准确率高的超参数, 作为算法验证结果.</li>
+<li>用测试集评价算法.</li>
+</ol>
+<p>在数据量较小时, 可以使用<strong>交叉验证</strong>.<br>和上面步骤不同的是, 交叉验证又将训练集分为n个部分, 每次使用1个部分作为验证集, 剩下的部分为训练集, 从n份验证的结果取平均值作为验证结果.</p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ol>
+<li>每次都需要比对数据集中的所有图片, 速度慢.</li>
+<li>分类器需要将所有的训练数据存储起来, 需要巨大的存储空间.</li>
+<li>距离算法的缺点: <ol>
+<li>将各个维度的单位当作相同的看待,如(10,0),(0,10)到原点有相同的距离.</li>
+<li>没有考虑向量各个分量的分布是不同的.</li>
+</ol>
+</li>
+<li>维度灾难<blockquote>
+<p>在机器学习问题中，需要在高维特征空间（每个特征都能够取一系列可能值）的有限数据样本中学习一种“自然状态”（可能是无穷分布），要求有相当数量的训练数据含有一些样本组合。给定固定数量的训练样本，其预测能力随着维度的增加而减小。</p>
+</blockquote>
+</li>
+</ol>
+<p>也就是说, 数据集的必须密集地分布与空间中, 否则在测试时, 就会选择到相似度不那么高的数据, 降低预测的准确度. 但是在维度增加时, 要保证在空间的密集, 数据集规模的增加必须是指数倍的.</p>
+<h2 id="线性分类"><a href="#线性分类" class="headerlink" title="线性分类"></a>线性分类</h2></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Links</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/07/27/DL1_20180727/">http://yoursite.com/2018/07/27/DL1_20180727/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cs231n/">cs231n</a><a class="post-meta__tags" href="/tags/机器学习/">机器学习</a><a class="post-meta__tags" href="/tags/计算机视觉/">计算机视觉</a></div><div class="social-share" data-disabled="google,facebook,twitter,qzone,douban,diandian,linkedin,tencent"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/2018/07/22/Rime1_20180722/"><span>Rime-中州韵输入法的配置和使用</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.1.9-beta9/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'33C2t6cVdM0ThsCP5EjGsPzK-gzGzoHsz',
+  appKey:'a7T1zxX3NqNn72iKgtK3jSNF',
+  placeholder:'随便说点什么?',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 By Links</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
