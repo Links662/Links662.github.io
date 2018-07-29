@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="深度学习从入门到放弃:cs231n(2)-线性分类"><meta name="keywords" content="cs231n,机器学习"><meta name="author" content="Links,undefined"><meta name="copyright" content="Links"><title>深度学习从入门到放弃:cs231n(2)-线性分类 | Links's Blog</title><link rel="shortcut icon" href="/img/my-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.5.6"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css?version=1.5.6"><link rel="dns-prefetch" href="https://cdn.staticfile.org"><link rel="dns-prefetch" href="https://cdn.bootcss.com"><link rel="dns-prefetch" href="https://creativecommons.org"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#线性分类-Linear-Classification"><span class="toc-number">1.</span> <span class="toc-text">线性分类(Linear Classification)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#评分函数"><span class="toc-number">2.</span> <span class="toc-text">评分函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线性分类器"><span class="toc-number">3.</span> <span class="toc-text">线性分类器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对线性分类器的理解"><span class="toc-number">3.1.</span> <span class="toc-text">对线性分类器的理解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#损失函数"><span class="toc-number">4.</span> <span class="toc-text">损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#损失函数的形式"><span class="toc-number">4.1.</span> <span class="toc-text">损失函数的形式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多类别支持向量机损失函数-Multiclass-Support-Vector-Machine-Loss"><span class="toc-number">4.2.</span> <span class="toc-text">多类别支持向量机损失函数(Multiclass Support Vector Machine Loss)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#正则化-Regularization"><span class="toc-number">4.2.1.</span> <span class="toc-text">正则化(Regularization)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Softmax分类器"><span class="toc-number">4.3.</span> <span class="toc-text">Softmax分类器</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/Taiho.jpg"></div><div class="author-info__name text-center">Links</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">4</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">6</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">2</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/cv16.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Links's Blog</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus"><a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a><a class="site-page" href="/gallery">Gallery</a><a class="site-page" href="/about">About</a></span></div><div id="post-info"><div id="post-title">深度学习从入门到放弃:cs231n(2)-线性分类</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-29</time><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">1,412</span><span class="post-meta__separator">|</span><span>Reading time: 5 min</span></div></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="线性分类-Linear-Classification"><a href="#线性分类-Linear-Classification" class="headerlink" title="线性分类(Linear Classification)"></a>线性分类(Linear Classification)</h2><blockquote>
+<p>我们将要实现一种更强大的方法来解决图像分类问题，该方法可以自然地延伸到神经网络和卷积神经网络上。这种方法主要有两部分组成：一个是评分函数（score function），它是原始图像数据到类别分值的映射。另一个是损失函数（loss function），它是用来量化预测分类标签的得分与真实标签之间一致性的。该方法可转化为一个最优化问题，在最优化过程中，将通过更新评分函数的参数来最小化损失函数值。</p>
+</blockquote>
+<h2 id="评分函数"><a href="#评分函数" class="headerlink" title="评分函数"></a>评分函数</h2><p>线性分类的第一个部分就是一个评分函数, 用于将输入的图像转换为各个分类上的评分.  </p>
+<script type="math/tex; mode=display">
+f(x,W)</script><p> x是输入的图片拉伸出的D维列向量([D*1]), 分类共有N个, W是经过训练计算出的<strong>参数</strong>(权重), 是一个[N*D]的矩阵. 那么, 计算出的$f(x,W)$就会是一个N维列向量([N*1]), 向量的每一个分量就是每一个分类的评分.</p>
+<a id="more"></a>
+<p>假设x为一个2*2的图像, 拉伸后的向量为(11,2,13,24), 选择 $f(x,W)=x*W$ , 作为评分函数.</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">w=np.array([[<span class="number">0.1</span>,<span class="number">0.2</span>,<span class="number">0.3</span>,<span class="number">0.4</span>],</span><br><span class="line">            [<span class="number">-0.1</span>,<span class="number">0.2</span>,<span class="number">-0.3</span>,<span class="number">0.4</span>]])</span><br><span class="line">x=np.array([<span class="number">11</span>,<span class="number">2</span>,<span class="number">13</span>,<span class="number">24</span>])</span><br><span class="line">f=np.dot(w,x)</span><br><span class="line"><span class="keyword">print</span> f <span class="comment"># print [15.  5.] 分别为第一类和第二类评分</span></span><br></pre></td></tr></table></figure>
+<h2 id="线性分类器"><a href="#线性分类器" class="headerlink" title="线性分类器"></a>线性分类器</h2><script type="math/tex; mode=display">
+f(x,W)=x*W</script><p>上面的函数就是一个最简单的线性分类器, 我们为这个函数加上一个<strong>偏差向量</strong>b, 体现我们对某一类的偏好值.<br>最终, 函数变成了这种形式:</p>
+<script type="math/tex; mode=display">
+f(x,W)=x*W+b</script><p>这就是一个最简单的线性分类器了.</p>
+<h3 id="对线性分类器的理解"><a href="#对线性分类器的理解" class="headerlink" title="对线性分类器的理解"></a>对线性分类器的理解</h3><ul>
+<li><p>模板匹配</p>
+<p>  可以看出, 每一个类的分类, 与W中的每一个行向量有关, 我们可以将每一个行向量还原为图像, 就得到了每一个类的<strong>模板</strong>. 那么我们的分类器所做的, 就是通过向量点乘的方法, 将待测图片与每个模板进行比较, 并对比较的结果评分, 找到与哪个模板最相似.</p>
+</li>
+<li><p>高维空间的线性决策</p>
+<p>  每一张图像都是一个D维列向量, 我们可以把它当成是一个高维空间上的点, 分类器的任务, 就是在这个高维空间中画出一个线性的分类面, 将一块空间划分为一个类和其他的类两个部分.</p>
+<p><img src="https://i.loli.net/2018/07/29/5b5d8cb03e5e9.jpg" alt=""></p>
+</li>
+</ul>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>在评分函数中, 我们需要设定一个W来对图像进行分类, 那么如何选出一个W, 使得评分函数在正确的分类上有最高的评分(也就是选对分类). 于是, 我们又要引入一个函数来量化评价一个W的好坏, 这个函数就是<strong>损失函数</strong>.</p>
+<blockquote>
+<p>损失函数（Loss Function）（有时也叫代价函数Cost Function或目标函数Objective）衡量我们对结果的不满意程度。直观地讲，当评分函数输出结果与真实结果之间差异越大，损失函数输出越大，反之越小。</p>
+</blockquote>
+<h3 id="损失函数的形式"><a href="#损失函数的形式" class="headerlink" title="损失函数的形式"></a>损失函数的形式</h3><p><strong>数据集</strong>: ${(x<em>i,y_i)}^N</em>{i=1}$</p>
+<p>损失函数为:</p>
+<script type="math/tex; mode=display">
+L={1 \over N}\sum_i L_i(f(x_i,W),y_i)</script><h3 id="多类别支持向量机损失函数-Multiclass-Support-Vector-Machine-Loss"><a href="#多类别支持向量机损失函数-Multiclass-Support-Vector-Machine-Loss" class="headerlink" title="多类别支持向量机损失函数(Multiclass Support Vector Machine Loss)"></a>多类别支持向量机损失函数(Multiclass Support Vector Machine Loss)</h3><script type="math/tex; mode=display">
+L_i=\sum_{j\neq y_i} \max(0,S_j-S_{y_i}+\Delta)</script><p>$\Delta$为安全边距(Safety margin), 通常设为1.<br>也就是说当评分函数 (在正确分类上的评分-在错误分类上的评分)&gt;$\Delta$, 函数在这个分类上的损失为0, 也可以说这是一个折页损失函数.</p>
+<h4 id="正则化-Regularization"><a href="#正则化-Regularization" class="headerlink" title="正则化(Regularization)"></a>正则化(Regularization)</h4><blockquote>
+<p>假设有一个数据集和一个权重集W能够正确地分类每个数据（即所有的边界都满足，对于所有的i都有L_i=0）。问题在于这个W并不唯一：可能有很多相似的W都能正确地分类所有的数据。一个简单的例子：如果W能够正确分类所有数据，即对于每个数据，损失值都是0。那么当\lambda&gt;1时，任何数乘\lambda W都能使得损失值为0，因为这个变化将所有分值的大小都均等地扩大了，所以它们之间的绝对差值也扩大了。</p>
+</blockquote>
+<p>为了防止W的项过大或过于复杂, 我们要对W增加一点偏好, 使得它不向着更复杂的方向发展, 造成过拟合. 于是, 我们又对损失函数添加一个正则化惩罚 $\lambda R(W)$ , $\lambda$为一个超参数, 用于衡量惩罚的力度(正则化的强度) .</p>
+<p>最常用的是L2范式, 对W中的每个元素先平方后求和:</p>
+<script type="math/tex; mode=display">
+R(W)=\sum_k\sum_l(W_{k,l})^2</script><p>加上这个惩罚项, 我们得到了完整的多类别SVM函数, 它包含一个数据损失和一个正则化损失:</p>
+<script type="math/tex; mode=display">
+L={1 \over N}\sum_i L_i(f(x_i,W),y_i)+\lambda R(W)</script><h3 id="Softmax分类器"><a href="#Softmax分类器" class="headerlink" title="Softmax分类器"></a>Softmax分类器</h3><blockquote>
+<p>Softmax的输出（归一化的分类概率）更加直观，并且从概率上可以解释。在Softmax分类器中，函数映射f保持不变，但将这些评分值视为每个分类的未归一化的对数概率，并且将折叶损失（hinge loss）替换为交叉熵损失（cross-entropy loss）。</p>
+</blockquote>
+<p>公式如下:</p>
+<script type="math/tex; mode=display">
+P(Y=y_i|x=x_i)=\frac {e^{f_{y_i} } } {\sum_j e^{f_j} }</script><p>$P(Y=y_i|x=x_i)$在这里表示以 $x_i$ 为输入, 以W为参数选中正确标签 $y_i$ 的概率.</p>
+<p>我们选择一个函数$L_i=-\log P$对P进行处理, 得到$L_i$的公式. 最终使这个损失函数取值为$(0,+\infty)$ .</p>
+<script type="math/tex; mode=display">
+L_i=-\log(\frac {e^{f_{y_i} } } {\sum_j e^{f_j} })</script></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Links</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2018/07/29/DL2-20180729/">http://yoursite.com/2018/07/29/DL2-20180729/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/cs231n/">cs231n</a><a class="post-meta__tags" href="/tags/机器学习/">机器学习</a></div><div class="social-share" data-disabled="google,facebook,twitter,qzone,douban,diandian,linkedin,tencent"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script><nav id="pagination"><div class="next-post pull-right"><a href="/2018/07/27/DL1_20180727/"><span>深度学习从入门到放弃:cs231n(1)-K-NN分类器</span><i class="fa fa-chevron-right"></i></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@1.1.9-beta9/dist/Valine.min.js"></script><script>var notify = 'false' == true ? true : false;
+var verify = 'false' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'33C2t6cVdM0ThsCP5EjGsPzK-gzGzoHsz',
+  appKey:'a7T1zxX3NqNn72iKgtK3jSNF',
+  placeholder:'随便说点什么?',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10'
+})</script></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 By Links</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="/js/third-party/anime.min.js"></script><script src="/js/third-party/jquery.min.js"></script><script src="/js/third-party/jquery.fancybox.min.js"></script><script src="/js/third-party/velocity.min.js"></script><script src="/js/third-party/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.5.6"></script><script src="/js/fancybox.js?version=1.5.6"></script><script src="/js/sidebar.js?version=1.5.6"></script><script src="/js/copy.js?version=1.5.6"></script><script src="/js/fireworks.js?version=1.5.6"></script><script src="/js/transition.js?version=1.5.6"></script><script src="/js/scroll.js?version=1.5.6"></script><script src="/js/head.js?version=1.5.6"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script></body></html>
