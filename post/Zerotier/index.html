@@ -26,7 +26,7 @@
 <li>隐私和安全的风险。<br>流量终究是要过服务器的，如果是一些不太合规的服务不免出现提供商审查的风险。 <del>（既然你搭建了本地服务器，你的服务多半不太合规）</del> 总之我已经被腾讯云关掉了一个服务器。同时，一部分网页暴露在公网环境也有一定的风险，处理这些安全问题也是一个麻烦事。<del>你也不希望看自己照片需要输入强密码吧</del></li>
 <li>每个端口需要单独映射。<br>流量是通过服务器的端口进行转发的，显然也只能转发到你家里机器的一个端口。需求一多，慢慢点吧。不过这个已经是最细枝末节的问题了。</li>
 </ol>
-<h3 id="异地组网"><a href="#异地组网" class="headerlink" title="异地组网"></a>异地组网</h3><p>待更新</p>
+<h3 id="异地组网"><a href="#异地组网" class="headerlink" title="异地组网"></a>异地组网</h3><p>这部分本来是要写的，但是我仔细一想，异地组网就是下面的内容，你用就完事了，肯定好使。</p>
 <h2 id="Zerotier设置"><a href="#Zerotier设置" class="headerlink" title="Zerotier设置"></a>Zerotier设置</h2><h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p><a target="_blank" rel="noopener" href="https://www.zerotier.com/">https://www.zerotier.com/</a> 注册一个账号，有手就行。</p>
 <h3 id="创建网络"><a href="#创建网络" class="headerlink" title="创建网络"></a>创建网络</h3><p>注册并登录之后，可以创建一个网络。接下来介绍一些比较重要的选项。<br><strong>Access Control</strong><br>主要用来控制网络是否公开。<br><img src="https://cdnjson.com/images/2023/03/20/CopyQ.apCNCq.png"><br>如果选项为Private，那么所有连接进来的设备都需要自行打开Auth选项才能进入网络。<br><img src="https://cdnjson.com/images/2023/03/20/image645601e1736cebbc.png"><br>如果选项为Public，那么设备只要拥有网络ID就能进入网络。</p>
 <p><strong>IPv4 Auto-Assign</strong><br>选择一个虚拟网络的网段，随便选，只要IP不冲突均可。比如我们在这里就选择了<code>172.30.*.*</code>作为我们虚拟网络的网段。</p>
