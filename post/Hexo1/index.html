@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="使用Hexo+Github Page搭建博客"><meta name="keywords" content="Hexo"><meta name="author" content="Links"><meta name="copyright" content="Links"><title>使用Hexo+Github Page搭建博客 | Blog of Links</title><link rel="shortcut icon" href="/img/my-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.9.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.9.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  hexoVersion: '6.3.0'
+} </script><meta name="generator" content="Hexo 6.3.0"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Node-js"><span class="toc-number">2.1.</span> <span class="toc-text">Node.js</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git%E5%AE%89%E8%A3%85"><span class="toc-number">2.2.</span> <span class="toc-text">Git安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Github-Page%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">Github Page配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BARepository"><span class="toc-number">3.1.</span> <span class="toc-text">创建Repository</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AESSH"><span class="toc-number">3.2.</span> <span class="toc-text">配置SSH</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BB%E5%BD%95"><span class="toc-number">3.3.</span> <span class="toc-text">登录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">Hexo安装与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">4.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-config-yml"><span class="toc-number">4.2.</span> <span class="toc-text">配置_config.yml</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E6%8C%87%E4%BB%A4"><span class="toc-number">4.3.</span> <span class="toc-text">相关指令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%BC%96%E5%86%99%E4%B8%8E%E5%8F%91%E5%B8%83"><span class="toc-number">5.</span> <span class="toc-text">文章编写与发布</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E7%AB%A0"><span class="toc-number">5.1.</span> <span class="toc-text">创建文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Front-matter"><span class="toc-number">5.2.</span> <span class="toc-text">Front-matter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Read-More%E6%8C%89%E9%92%AE"><span class="toc-number">5.3.</span> <span class="toc-text">Read More按钮</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">主题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-number">6.1.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE"><span class="toc-number">6.2.</span> <span class="toc-text">设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D"><span class="toc-number">7.</span> <span class="toc-text">域名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E6%B3%A8%E5%86%8C"><span class="toc-number">7.1.</span> <span class="toc-text">域名注册</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Github-Page-%E7%BB%91%E5%AE%9A%E5%9F%9F%E5%90%8D"><span class="toc-number">7.2.</span> <span class="toc-text">Github Page 绑定域名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">7.3.</span> <span class="toc-text">域名解析设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A0%B9%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">7.3.1.</span> <span class="toc-text">根域名解析设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#www%E5%AD%90%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">7.3.2.</span> <span class="toc-text">www子域名解析设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%AD%90%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%AE%BE%E7%BD%AE"><span class="toc-number">7.3.3.</span> <span class="toc-text">自定义子域名解析设置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%95%99%E7%A8%8B"><span class="toc-number">8.</span> <span class="toc-text">参考教程</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/Taiho.jpg"></div><div class="author-info__name text-center">Links</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">4</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">7</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">1</span></a></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(/img/mika.jpg)"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Blog of Links</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">使用Hexo+Github Page搭建博客</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-20</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>看了各种搭建博客的方案, 对比了一下各种选项, 最后选择了Hexo+Github Page.</p>
+<blockquote>
+<p><strong>什么是 Hexo？</strong><br>Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+</blockquote>
+<blockquote>
+<p><strong>What is GitHub Pages?</strong><br>GitHub Pages is a static site hosting service designed to host your personal, organization, or project pages directly from a GitHub repository.  </p>
+</blockquote>
+<span id="more"></span>
+
+<p>使用这种方案建立的博客就会有这些特点:  </p>
+<ol>
+<li>基于静态网页, 速度快, 适合小网站.</li>
+<li>Github帮助托管网站, 省心.</li>
+<li>免费啊免费, 上面的两个工具都不要钱啊 <del>(划重点)</del> .</li>
+<li>可以绑定自己的域名.</li>
+</ol>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>访问<a href="nodejs.org">Node.js官网</a>获取安装包.<br>记得要勾选add to path.</p>
+<h3 id="Git安装"><a href="#Git安装" class="headerlink" title="Git安装"></a>Git安装</h3><p><a href="git-scm.com">Git官网</a><br>其实我是VS2017自带的.<br>以下需要使用命令行的操作均在Git bash中完成.</p>
+<h2 id="Github-Page配置"><a href="#Github-Page配置" class="headerlink" title="Github Page配置"></a>Github Page配置</h2><h3 id="创建Repository"><a href="#创建Repository" class="headerlink" title="创建Repository"></a>创建Repository</h3><ol>
+<li><p>在<a target="_blank" rel="noopener" href="https://github.com/">Github</a>创建一个帐号.  </p>
+</li>
+<li><p>帐号创建后, 选择绿色的New repository按钮, 创建一个代码仓库,  Repository name必须为 <code>你的用户名.github.io</code> .</p>
+</li>
+<li><p>进入刚创建的Repository-Settings, 下拉找到GitHub Pages选项, 等待一段时间会有绿色的提示 “Your site is published at xxx.io.”表示成功了.</p>
+<p> <img src="https://i.loli.net/2018/07/21/5b5352fc66271.png" alt="成功提示"></p>
+</li>
+</ol>
+<h3 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h3><p>配置ssh, 实现本地与Github的连接.</p>
+<ol>
+<li><p>在Git bash中输入</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮件地址&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>会出来几个确认选项, 全部回车确认.  </p>
+</li>
+<li><p>获取ssh keys<br>在”C:\Users\你的用户名.ssh”路径下可以看到”id_rsa”和”id_rsa.pub”文件.用记事本打开”id_rsa.pub”将内容复制到<br><code>你的Github主页-&gt;Settings-&gt;SSH and GPG keys-&gt;SSH keys</code> .</p>
+<p> <img src="https://i.loli.net/2018/07/21/5b53513542cae.png" alt=" "></p>
+</li>
+<li><p>输入以下内容测试ssh是否配置成功</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>如果显示”Hi xxx! You’ve successfully authenticated,  but GitHub does not provide shell access.”则为成功.</p>
+</li>
+</ol>
+<h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Github用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;Github邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Hexo安装与配置"><a href="#Hexo安装与配置" class="headerlink" title="Hexo安装与配置"></a>Hexo安装与配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ol>
+<li><p>在Git bash输入npm命令执行Hexo的安装.</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个文件夹作为存放所有文件的工作区.</p>
+<p>通过cd命令跳转到新建的文件夹, 在文件夹下初始化Hexo, 自动生成几个目录.</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d/Hexoworkspace</span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h3><ul>
+<li><p>网站选项</p>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">xxx&#x27;s</span> <span class="string">Blog</span> <span class="comment">#标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="comment">#小标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="comment">#描述</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Links</span> <span class="comment">#作者</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span> <span class="comment">#语言选项 可选en, zh-CN, zh-tw</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Shanghai</span> <span class="comment">#时区选项</span></span><br></pre></td></tr></table></figure>
+
+<p> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">时区选项</a> 参照wiki.</p>
+</li>
+<li><p>部署选项(必改)</p>
+  <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:用户名/用户名.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p> 所有参数见<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration.html">官方文档</a></p>
+</li>
+</ul>
+<h3 id="相关指令"><a href="#相关指令" class="headerlink" title="相关指令"></a>相关指令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo g <span class="comment">#hexo generate 生成静态文件</span></span><br><span class="line">hexo s <span class="comment">#hexo server 开启本地服务器, 访问网址为localhost:4000</span></span><br><span class="line">hexo d <span class="comment">#hexo deploy 部署到服务器</span></span><br><span class="line">hexo clean <span class="comment">#删除缓存和静态文件(public)</span></span><br><span class="line">hexo --cwd /path/to/cwd <span class="comment">#自定义cwd</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文章编写与发布"><a href="#文章编写与发布" class="headerlink" title="文章编写与发布"></a>文章编写与发布</h2><h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new [layout] title</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">布局(layout)</th>
+<th align="center">路径</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">post</td>
+<td align="center">source&#x2F;_post</td>
+<td align="center">在页面发布文章</td>
+</tr>
+<tr>
+<td align="center">page</td>
+<td align="center">source</td>
+<td align="center">创建一个新页面</td>
+</tr>
+<tr>
+<td align="center">draft</td>
+<td align="center">source&#x2F;_drafts</td>
+<td align="center">草稿</td>
+</tr>
+</tbody></table>
+<p>Hexo会在选定的布局对应的路径下创建一个md文件, 打开就可以编辑文章或页面了.</p>
+<h3 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h3><p>Hexo自动生成的文章属性.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">使用Hexo+Github</span> <span class="string">Page搭建博客</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2018-07-20 19:19:37</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">Hexo</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">教程</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">附加一段文章摘要</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Read-More按钮"><a href="#Read-More按钮" class="headerlink" title="Read More按钮"></a>Read More按钮</h3><p>Hexo默认在首页放出全文.<br>如果需要设置摘要, 可以选择在需要省略的部分前面加上Read More按钮.</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#摘要</span></span><br><span class="line"><span class="string">&lt;!--</span> <span class="string">more</span> <span class="string">--&gt;</span></span><br><span class="line"><span class="comment">#省略的正文</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2018/07/21/5b53536cb40a4.png" alt="实现效果"></p>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>首先找一个主题, 可以在Hexo官网下载, 也可以从其他地方下载.</p>
+<ol>
+<li><p>直接把主题文件夹复制到Hexo工作目录的&#x2F;themes下.</p>
+</li>
+<li><p>找到主题的github页面, 在bash中输入命令下载.</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> (web URL) themes/主题名字</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://i.loli.net/2018/07/24/5b569ba92cd5c.png"></p>
+</li>
+</ol>
+<p>两种方法的效果是一样的.</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>在Hexo工作目录下找到_config.yml.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">主题名字</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>可以给你的网站绑定一个域名, 通过域名来访问Github Page, 比如输入 <code>www.example.com</code>就会跳转到你的博客.</p>
+<h3 id="域名注册"><a href="#域名注册" class="headerlink" title="域名注册"></a>域名注册</h3><p>首先你要有一个域名, 可以在阿里云, GoDaddy之类的地方购买一个.</p>
+<h3 id="Github-Page-绑定域名"><a href="#Github-Page-绑定域名" class="headerlink" title="Github Page 绑定域名"></a>Github Page 绑定域名</h3><p>在 <code>Repository-&gt;Settings-&gt;Github Page-&gt;Custom domain</code> 中填写自己的域名, 将其绑定到你的页面.<br><img src="https://i.loli.net/2018/07/24/5b56a069bbe56.png"></p>
+<p>如果填写的是 <code>www.example.com</code> , 那么 <code>www.example.com</code> 和 <code>example.com</code> 都会被重定向到 <code>www.example.com</code> .</p>
+<p>如果填写的是 <code>example.com</code> , 那么以上两个域名都会被重定向到 <code>example.com</code> .</p>
+<h3 id="域名解析设置"><a href="#域名解析设置" class="headerlink" title="域名解析设置"></a>域名解析设置</h3><blockquote>
+<p>域名注册后，你只是拥有了域名的使用权，但无法通过域名直接访问你的网站。域名解析是使用域名访问你的网站的必备环节。</p>
+</blockquote>
+<h4 id="根域名解析设置"><a href="#根域名解析设置" class="headerlink" title="根域名解析设置"></a>根域名解析设置</h4><p>如果你希望通过 <code>example.com</code> 这样的域名来访问你的页面, 你需要在DNS解析设置中创建以下 <code>A</code> 记录.</p>
+<blockquote>
+<p>185.199.108.153<br>185.199.109.153<br>185.199.110.153<br>185.199.111.153</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/07/24/5b56ae155b025.png" alt="大概是这个样子的界面"></p>
+<h4 id="www子域名解析设置"><a href="#www子域名解析设置" class="headerlink" title="www子域名解析设置"></a>www子域名解析设置</h4><p>如果你希望通过 <code>www.example.com</code> 访问页面, 可以在DNS解析设置中创建 <code>CNAME</code> 记录, 指向你的Github Page, 比如<code>YOUR-GITHUB-USERNAME.github.io</code> .</p>
+<p><img src="https://i.loli.net/2018/07/24/5b56a5b963200.png"></p>
+<h4 id="自定义子域名解析设置"><a href="#自定义子域名解析设置" class="headerlink" title="自定义子域名解析设置"></a>自定义子域名解析设置</h4><p>你可以使用自定义子域名, 如 <code>blog.example.com</code> 访问页面.<br>操作和上面的www子域名相同, 创建 <code>CNAME</code> 记录, 指向你的Github Page.</p>
+<h2 id="参考教程"><a href="#参考教程" class="headerlink" title="参考教程"></a>参考教程</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#hexo%E7%AE%80%E4%BB%8B">https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html#hexo%E7%AE%80%E4%BB%8B</a></p>
+<p>官方文档 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p>
+<p><a target="_blank" rel="noopener" href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/">https://help.github.com/articles/using-a-custom-domain-with-github-pages/</a></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Links</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://blog.taiho.cc/post/Hexo1/">http://blog.taiho.cc/post/Hexo1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hexo/">Hexo</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/post/Rime1/"><i class="fa fa-chevron-left">  </i><span>Rime-中州韵输入法的配置和使用</span></a></div></nav><div id="vcomment"></div><script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var notify = 'false' == 'true';
+var verify = 'false' == 'true';
+var record_ip = '' == 'true';
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+window.valine = new Valine({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  recordIP:record_ip,
+  appId:'33C2t6cVdM0ThsCP5EjGsPzK-gzGzoHsz',
+  appKey:'a7T1zxX3NqNn72iKgtK3jSNF',
+  placeholder:'随便说点什么?',
+  avatar:'mm',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang: 'zh-cn'
+})</script></div></div><footer class="footer-bg" style="background-image: url(/img/mika.jpg)"><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2025 By Links</div><div class="framework-info"><span>Driven - </span><a target="_blank" rel="noopener" href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/hexo-theme-melody"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/lib/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.9.1"></script><script src="/js/fancybox.js?version=1.9.1"></script><script src="/js/sidebar.js?version=1.9.1"></script><script src="/js/copy.js?version=1.9.1"></script><script src="/js/fireworks.js?version=1.9.1"></script><script src="/js/transition.js?version=1.9.1"></script><script src="/js/scroll.js?version=1.9.1"></script><script src="/js/head.js?version=1.9.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
